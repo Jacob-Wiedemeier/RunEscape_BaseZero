@@ -1,0 +1,9 @@
+{
+  "name": "run-escape_base-zero",
+  "version": "0.0.0",
+  "description": "RunEscape_BaseZero",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}

@@ -1,0 +1,3 @@
+C:\Users\jacob\source\repos\RunEscape_BaseZero\RunEscape_BaseZero\obj\Debug\RunEscape_BaseZero.njsproj.AssemblyReference.cache
+C:\Users\jacob\source\repos\RunEscape_BaseZero\RunEscape_BaseZero\obj\Debug\RunEscape_BaseZero.njsproj.CoreCompileInputs.cache
+C:\Users\jacob\source\repos\RunEscape_BaseZero\RunEscape_BaseZero\bin\Microsoft.NodejsTools.WebRole.dll
