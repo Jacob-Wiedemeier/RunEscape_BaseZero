@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "RunEscape_BaseZero",
   "main": "app.js",
+<<<<<<< HEAD
   "author": {
     "name": ""
   },
@@ -12,4 +13,15 @@
   "dependencies": {
     "mysql": "^2.18.1"
   }
+=======
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
+>>>>>>> b1851f95bf3a46092d58dfb23ef7862342cd337e
 }

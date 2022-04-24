@@ -1,34 +1,15 @@
-'use strict';
+const express = require('express');
+const app  = express();
+const path = require('path');
+const router = express.Router();
 
-const mariadb = require('mariadb');
+app.use('/static', express.static('public'));
 
-//test query
-async function main() {
-    try {
-        const conn = await mariadb.createConnection({
-            host: 'd805d2.stackhero-network.com',
-            user: 'root',
-            password: 'OkhxZ62FIP4f5YRJdjC4tjP9E0lvLO2w',
-            database: 'basezero'
-        });
-        // Use Connection to get contacts data
-        var rows = await get_contacts(conn);
+router.get('/', function(req, res){
+    res.sendFile(path.join(__dirname+'/interface.html'));
+});
 
-        //Print list of contacts
-        for (i = 0, len = rows.length; i < len; i++) {
-            console.log(`${rows[i].Name} ${rows[i].Attack} <${rows[i].FK_ItemID}>`);
-        }
-    } catch (err) {
-        // Manage Errors
-        console.log(err);
-    } finally {
-        // Close Connection
-        if (conn) conn.close();
-    }
-}
-function get_contacts(conn) {
-    return conn.query("SELECT * FROM basezero.Enemy");
-}
+app.use('/', router);
+app.listen(process.env.port || 3000);
 
-main();
-console.log('Hello world');
+console.log("Running on port 3000");
