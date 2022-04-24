@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "description": "RunEscape_BaseZero",
   "main": "app.js",
-  "author": {
-    "name": ""
-  }
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
 }
