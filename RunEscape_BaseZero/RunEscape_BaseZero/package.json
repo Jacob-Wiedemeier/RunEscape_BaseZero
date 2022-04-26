@@ -3,19 +3,11 @@
   "version": "0.0.0",
   "description": "RunEscape_BaseZero",
   "main": "app.js",
-<<<<<<< HEAD
-  "author": {
-    "name": ""
-  },
   "devDependencies": {
     "morgan": "^1.10.0"
   },
   "dependencies": {
-    "mysql": "^2.18.1"
-  }
-=======
-  "author": "",
-  "dependencies": {
+    "mysql": "^2.18.1",
     "express": "^4.17.3"
   },
   "scripts": {
@@ -23,5 +15,4 @@
   },
   "keywords": [],
   "license": "ISC"
->>>>>>> b1851f95bf3a46092d58dfb23ef7862342cd337e
 }

@@ -10,6 +10,8 @@ let createMySQLConnection = () => {
     });
 };
 
+// Function for getting all WorldNodes.
+// Returns an array of Objects
 let getWorldNodes = async function() {
     let connection = createMySQLConnection();
     let worldNodes = [];
@@ -22,8 +24,10 @@ let getWorldNodes = async function() {
         });
     }).then((results) => {
         results.forEach((node) => {
-            let tempID = node.WorldNodeID;
-            worldNodes.push(tempID);
+            let thisWorldNode = {
+                worldNodeID: node.WorldNodeID
+            }
+            worldNodes.push(thisWorldNode);
         });
     }).catch((err) => {
         console.log(err);
@@ -31,6 +35,30 @@ let getWorldNodes = async function() {
     return worldNodes;
 }
 
+// Function for getting a single WorldNode by its ID
+// Returns a single Object
+let getWorldNodeById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM WorldNode WHERE WorldNodeID=${id}`, (err, results, fields) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            worldNodeID: results[0].WorldNodeID
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all Enemies
+// Returns an array of Objects
 let getEnemies = async function() {
     let connection = createMySQLConnection();
     let enemies = [];
@@ -65,6 +93,41 @@ let getEnemies = async function() {
     return enemies;
 }
 
+// Function for getting a single Enemy by its ID
+// Returns a single Object
+let getEnemyById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Enemy WHERE EnemyID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            enemyID: results[0].EnemyID,
+            name: results[0].Name,
+            maxHealth: results[0].MaxHealth,
+            currentHealth: results[0].CurrentHealth,
+            attack: results[0].Attack,
+            defense: results[0].Defense,
+            nextSpawnTime: results[0].NextSpawnTime,
+            respawnDelay: results[0].RespawnDelay,
+            experienceReward: results[0].ExperienceReward,
+            fk_WorldNode: results[0].FK_WorldNode,
+            fk_Username: results[0].FK_Username,
+            fk_ItemID: results[0].FK_ItemID
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all Consumables
+// Returns an array of Objects
 let getConsumables = async function() {
     let connection = createMySQLConnection();
     let consumables = [];
@@ -90,6 +153,32 @@ let getConsumables = async function() {
     return consumables;
 }
 
+// Function for getting a single Consumable by its ID
+// Returns a single Object
+let getConsumableById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Consumable WHERE ItemID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            itemID: results[0].ItemID,
+            healthModifier: results[0].HealthModifier,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all Equipables
+// Returns an array of Objects
 let getEquipables = async function() {
     let connection = createMySQLConnection();
     let equipables = [];
@@ -116,6 +205,33 @@ let getEquipables = async function() {
     return equipables;
 }
 
+// Function for getting a single Equipable by its ID
+// Returns a single Object
+let getEquipableById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Equipable WHERE ItemID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            itemID: results[0].ItemID,
+            attackModifier: results[0].AttackModifier,
+            defenseModifier: results[0].DefenseModifier,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all Includes
+// Returns an array of Objects
 let getIncludes = async function() {
     let connection = createMySQLConnection();
     let includes = [];
@@ -140,6 +256,30 @@ let getIncludes = async function() {
     return includes;
 }
 
+// Function for getting a single Includes by its RecipeID
+// Returns a single Object
+// let getIncludesByRecipeID = async function(id) {
+//     let connection = createMySQLConnection();
+//     let obj = {};
+//     await new Promise((resolve, reject) => {
+//         connection.connect();
+//         connection.query(`SELECT * FROM Includes WHERE FK_RecipeID=${id}`, (err, results) => {
+//             connection.end();
+//             if (err) reject (err);
+//             else resolve(results);
+//         });
+//     }).then((results) => {
+//         obj = {
+            
+//         };
+//     }).catch((err) => {
+//         console.log(err);
+//     });
+//     return obj;
+// }
+
+// Function for getting all Items
+// Returns an array of Objects
 let getItems = async function() {
     let connection = createMySQLConnection();
     let items = [];
@@ -165,6 +305,32 @@ let getItems = async function() {
     return items;
 }
 
+// Function for getting a single Item by its ID
+// Returns a single Object
+let getItemById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Item WHERE ItemID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            itemID: results[0].ItemID,
+            name: results[0].Name,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting the Player
+// Returns one Object
 let getPlayer = async function() {
     let connection = createMySQLConnection();
     let player = {};
@@ -193,6 +359,8 @@ let getPlayer = async function() {
     return player;
 }
 
+// Function for getting all Recipes
+// Returns an array of Objects
 let getRecipes = async function() {
     let connection = createMySQLConnection();
     let recipes = [];
@@ -220,6 +388,168 @@ let getRecipes = async function() {
     return recipes;
 }
 
+// Function for getting a single Recipe by its ID
+// Returns a single Object
+let getRecipeById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Recipe WHERE RecipeID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            recipeID: results[0].RecipeID,
+            craftingRequirement: results[0].CraftingRequirement,
+            experienceReward: results[0].ExperienceReward,
+            fk_ItemID: results[0].FK_ItemID,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all Resources
+// Returns an array of Objects
+let getResources = async function() {
+    let connection = createMySQLConnection();
+    let resources = [];
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query('SELECT * FROM Resource;', (err, results, fields) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        results.forEach((resource) => {
+            let thisResource = {
+                resourceID: resource.ResourceID,
+                name: resource.Name,
+                nextHarvestTime: resource.NextHarvestTime,
+                harvestRequirement: resource.HarvestRequirement,
+                respawnDelay: resource.RespawnDelay,
+                experienceReward: resource.ExperienceReward,
+                fk_WorldNode: resource.FK_WorldNode,
+                fk_ItemID: resource.FK_ItemID,
+                fk_Username: resource.FK_Username
+            };
+            resources.push(thisResource);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+    return resources;
+}
+
+// Function for getting a single Resource by its ID
+// Returns a single Object
+let getResourceById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Resource WHERE ResourceID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            resourceID: results[0].ResourceID,
+            name: results[0].Name,
+            nextHarvestTime: results[0].NextHarvestTime,
+            harvestRequirement: results[0].HarvestRequirement,
+            respawnDelay: results[0].RespawnDelay,
+            experienceReward: results[0].ExperienceReward,
+            fk_WorldNode: results[0].FK_WorldNode,
+            fk_ItemID: results[0].FK_ItemID,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for getting all WorldEdges
+// Returns an array of Objects
+let getWorldEdges = async function() {
+    let connection = createMySQLConnection();
+    let worldEdges = [];
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query('SELECT * FROM WorldEdge;', (err, results, fields) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        results.forEach((worldEdge) => {
+            let thisWorldEdge = {
+                worldEdgeID: worldEdge.WorldEdgeID,
+                fk_Source: worldEdge.FK_Source,
+                fk_Destination: worldEdge.FK_Destination,
+                fk_WorldNodeID: worldEdge.FK_WorldNodeID
+            };
+            worldEdges.push(thisWorldEdge);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+    return worldEdges;
+}
+
+// Function for getting a single WorldEdge by its ID
+// Returns a single Object
+let getWorldEdgeById = async function(id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM WorldEdge WHERE WorldEdgeID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            worldEdgeID: results[0].WorldEdgeID,
+            fk_Source: results[0].FK_Source,
+            fk_Destination: results[0].FK_Destination,
+            fk_WorldNodeID: results[0].FK_WorldNodeID
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+// Function for running a SQL statement
+// Returns an array of Objects
+let getSQLQuery = async function(statement) {
+    let connection = createMySQLConnection();
+    let res = [];
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(statement, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        res = results;
+    }).catch((err) => {
+        console.log(err);
+    });
+    return res;
+}
+
 module.exports = {
     getWorldNodes: getWorldNodes,
     getEnemies: getEnemies,
@@ -228,5 +558,16 @@ module.exports = {
     getIncludes: getIncludes,
     getItems: getItems,
     getPlayer: getPlayer,
-    getRecipes: getRecipes
+    getRecipes: getRecipes,
+    getResources: getResources,
+    getWorldEdges: getWorldEdges,
+    getWorldNodeById: getWorldNodeById,
+    getEnemyById: getEnemyById,
+    getConsumableById: getConsumableById,
+    getEquipableById: getEquipableById,
+    getItemById: getItemById,
+    getRecipeById: getRecipeById,
+    getResourceById: getResourceById,
+    getWorldEdgeById: getWorldEdgeById,
+    getSQLQuery: getSQLQuery
 }
