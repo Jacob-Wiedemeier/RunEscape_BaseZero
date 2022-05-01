@@ -18,7 +18,24 @@ class Resource extends Sprite{
     }
 
     harvest(){
-        
+        /*
+         * Player must have enough exp to harvest
+         * Player must have enough inventory space to harvest
+         * Give player item, give player exp set respawn delay
+        */
+       var playerHarvestExp = 0;
+       // GET Player.HarvestingExperience
+       var harvestLevelRequirement = 0;
+       // GET Resource.HarvestRequirement
+       var remainingInventory = playerInventorySpace();
+
+       if(LevelRequirementMet(playerHarvestExp, harvestLevelRequirement) && remainingInventory > 0){
+            var nextSpawn = new Date();
+            // INCREASE nextSpawn by Resource.RespawnDelay (seconds)
+            super.hide();
+            // INCREASE Player.HarvestingExperience by Resource.ExperienceReward
+            // ADD Resource.FK_ItemID to Player's Inventory
+       }
     }
 
 }

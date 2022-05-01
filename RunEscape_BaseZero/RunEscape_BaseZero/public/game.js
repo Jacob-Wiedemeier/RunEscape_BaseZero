@@ -4,7 +4,7 @@ let w = 1600, h = 900;
 let app = new PIXI.Application({width:w, height:h, antialias:true});
 let inventory = [];
 let equipment = [];
-let craftingMenu;
+let craftingMenu = null;
 let enemies = [];
 let resources = [];
 let worldEdges = [];
@@ -13,6 +13,9 @@ app.renderer.backgroundColor = 0x00FFFF;
 document.body.appendChild(app.view);
 setInterval(gameLoop, 1000/60);
 drawUIConstant();
+let statsDisplay = new Stats();
+statsDisplay.init();
+
 
 function gameLoop(){
 
@@ -34,10 +37,11 @@ function drawUIConstant(){
 
     let craftingPane = new PIXI.Graphics();
     craftingPane.beginFill(0xA0A0A0);
-    craftingPane.drawRect(11*w/16, 7*h/8, 3*w/16, h/8);
+//    craftingPane.drawRect(11*w/16, 7*h/8, 3*w/16, h/8);
+    craftingPane.drawRect(13*w/16, 7*h/8, 1*w/16, h/8);
     craftingPane.beginFill(0xBBBBBB);
-    craftingPane.drawRect(11*w/16+w/128, 7*h/8+h/128, w/20, h/9);
-    craftingPane.drawRect(11*w/16+w/16+w/128, 7*h/8+h/128, w/20, h/9);
+//    craftingPane.drawRect(11*w/16+w/128, 7*h/8+h/128, w/20, h/9);
+//    craftingPane.drawRect(11*w/16+w/16+w/128, 7*h/8+h/128, w/20, h/9);
     craftingPane.drawRect(11*w/16+w/8+w/128, 7*h/8+h/128, w/20, h/9);
     app.stage.addChild(craftingPane);
 

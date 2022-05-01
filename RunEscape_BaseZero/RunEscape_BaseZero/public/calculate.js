@@ -10,6 +10,6 @@ function ExpToLevel(experience){
     return math.floor(experience / 10) + 1;
 }
 
-function LevelRequirementMet(experienceCurrent, experienceRequirement){
-    return ExpToLevel(experienceCurrent) >= ExpToLevel(experienceRequirement);
+function LevelRequirementMet(experienceCurrent, levelRequirement){
+    return ExpToLevel(experienceCurrent) >= levelRequirement;
 }

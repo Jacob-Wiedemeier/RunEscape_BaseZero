@@ -32,4 +32,10 @@ class WorldEdge extends Sprite{
         // Return the columns associated with ItemId
         //return await db.getSQLQuery("SELECT * FROM WorldEdge WHERE WorldEdgeID = " + this.id + ";")[0];
     }
+
+    async traverse(){
+        // SET Player.FK_WorldNodeID = WorldEdge.FK_WorldNodeID
+        // hide() and delete all current sprites
+        // generate and show() all sprites from the WorldNode we travelled to
+    }
 }
