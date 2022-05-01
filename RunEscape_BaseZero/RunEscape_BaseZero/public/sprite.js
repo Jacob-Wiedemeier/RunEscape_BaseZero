@@ -1,16 +1,18 @@
 class Sprite{
-    constructor(filename, posX, posY){
+    // not a constructor because super() constructor can only be called easily from other constructors, and we have to use async init functions.
+    init(filename, posX, posY){
         let sprite = new PIXI.Sprite.from(filename);
         sprite.anchor.set(posX, posY);
         sprite.interactive = true;
-        sprite.on('click', function(){
-            console.log("Figure out how to lookup correct sprite interaction");
-        });
-        app.stage.addChild(sprite);
         this.sprite = sprite;
     }
-    remove(){
+    hide(){
         app.stage.removeChild(this.sprite);
     }
-
+    show(){
+        app.stage.addChild(this.sprite);
+    }
+    get(){
+        return this.sprite;
+    }
 }

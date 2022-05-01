@@ -1,5 +1,7 @@
 class WorldEdge extends Sprite{
-    constructor(destinationNode){
+    // initialization requires async functions, so handle construction in init function.
+    async init(id){
+        this.id = id;
         let x = 0, y = 0;
         switch(Math.floor(Math.random()*4)){
             case 0: // left
@@ -19,7 +21,15 @@ class WorldEdge extends Sprite{
                 y = Math.floor(Math.random()*(h/8)+7*h/8);
                 break;
         }
-        this.destination = destinationNode;
-        super("WorldEdgeSprite.jpg", x, y);
+        this.destination = await(this.dbQueryWorldEdge().FK_WorldNodeID);
+
+        super.init("WorldEdgeSprite.jpg", x, y);
+        
+        super.show();
+    }
+
+    async dbQueryWorldEdge(){
+        // Return the columns associated with ItemId
+        return await db.getSQLQuery("SELECT * FROM WorldEdge WHERE WorldEdgeID = " + this.id + ";")[0];
     }
 }
