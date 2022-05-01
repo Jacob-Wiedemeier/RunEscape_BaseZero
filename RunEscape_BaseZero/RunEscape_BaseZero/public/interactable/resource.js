@@ -14,11 +14,11 @@ class Resource extends Sprite{
     }
     async dbQueryResource(){
         // Return the columns associated with ItemId
-        return await db.getSQLQuery("SELECT * FROM RESOURCE WHERE ResourceID = " + this.id + ";")[0];
+        //return await db.getSQLQuery("SELECT * FROM RESOURCE WHERE ResourceID = " + this.id + ";")[0];
     }
 
     harvest(){
-
+        
     }
 
 }

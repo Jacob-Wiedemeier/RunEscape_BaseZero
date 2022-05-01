@@ -15,7 +15,7 @@ class Enemy extends Sprite{
 
     async dbQueryEnemy(){
         // Return the columns associated with ItemId
-        return await db.getSQLQuery("SELECT * FROM ENEMY WHERE EnemyID = " + this.id + ";")[0];
+        //return await db.getSQLQuery("SELECT * FROM ENEMY WHERE EnemyID = " + this.id + ";")[0];
     }
 
     fight(){

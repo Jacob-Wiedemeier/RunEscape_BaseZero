@@ -30,6 +30,6 @@ class WorldEdge extends Sprite{
 
     async dbQueryWorldEdge(){
         // Return the columns associated with ItemId
-        return await db.getSQLQuery("SELECT * FROM WorldEdge WHERE WorldEdgeID = " + this.id + ";")[0];
+        //return await db.getSQLQuery("SELECT * FROM WorldEdge WHERE WorldEdgeID = " + this.id + ";")[0];
     }
 }

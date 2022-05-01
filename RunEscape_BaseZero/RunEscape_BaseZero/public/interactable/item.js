@@ -15,7 +15,7 @@ class Item extends Sprite{
 
     async dbQueryItem(){
         // Return the columns associated with ItemId
-        return await db.getSQLQuery("SELECT * FROM ITEM WHERE ItemID = " + this.id + ";")[0];
+        //return await db.getSQLQuery("SELECT * FROM ITEM WHERE ItemID = " + this.id + ";")[0];
     }
 
     itemClicked(){
