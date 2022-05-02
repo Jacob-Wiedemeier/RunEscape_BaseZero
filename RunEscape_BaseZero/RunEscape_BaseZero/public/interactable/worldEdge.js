@@ -35,7 +35,6 @@ class WorldEdge extends Sprite{
 
     async traverse(){
         // SET Player.FK_WorldNodeID = WorldEdge.FK_WorldNodeID
-        // hide() and delete all current sprites
-        // generate and show() all sprites from the WorldNode we travelled to
+        loadScreen();
     }
 }

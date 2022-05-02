@@ -4,10 +4,10 @@ let w = 1600, h = 900;
 let app = new PIXI.Application({width:w, height:h, antialias:true});
 let inventory = [];
 let equipment = [];
-let craftingMenu = null;
-let enemies = [];
-let resources = [];
-let worldEdges = [];
+let craftingMenu = null; // holds the first ingredient in a given recipe
+let enemies = []; // holds all currently loaded enemies
+let resources = []; // holds all currently loaded resources
+let worldEdges = []; // holds all currently loaded world edges
 
 app.renderer.backgroundColor = 0x00FFFF;
 document.body.appendChild(app.view);
@@ -73,4 +73,22 @@ function drawUIConstant(){
         EXITSPAWNREGIONVISUALIZATION.drawRect(w/8, 7*h/8, 5*w/8, h/8); // bottom
         app.stage.addChild(EXITSPAWNREGIONVISUALIZATION);
     }
+}
+
+function clearScreen(){
+    // Make sure any graphics from the previous screen are hidden
+    enemies.forEach((en) => en.hide())
+    resources.forEach((re) => re.hide())
+    worldEdges.forEach((we) => we.hide())
+ 
+    // clear all lists
+    enemies = [];
+    resources = [];
+    worldEdges = [];
+}
+
+async function loadScreen(){
+    clearScreen();
+    // QUERY-HEAVY FUNCTION
+    // Populate Enemies, Resources, and worldEdges with whatever can be found in the node associated with Player.FK_WorldNodeID
 }

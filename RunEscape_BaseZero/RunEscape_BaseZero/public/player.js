@@ -8,6 +8,7 @@ function playerHealthCheck(){
         // SET Player.CurrentHealth = Player.MaxHealth
         // SET Player.FK_WorldNodeID = 1000; 
     }
+    statsDisplay.updateStats();
 }
 
 function playerCalcDamage(){
