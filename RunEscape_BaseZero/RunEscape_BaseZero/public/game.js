@@ -37,11 +37,8 @@ function drawUIConstant(){
 
     let craftingPane = new PIXI.Graphics();
     craftingPane.beginFill(0xA0A0A0);
-//    craftingPane.drawRect(11*w/16, 7*h/8, 3*w/16, h/8);
     craftingPane.drawRect(13*w/16, 7*h/8, 1*w/16, h/8);
     craftingPane.beginFill(0xBBBBBB);
-//    craftingPane.drawRect(11*w/16+w/128, 7*h/8+h/128, w/20, h/9);
-//    craftingPane.drawRect(11*w/16+w/16+w/128, 7*h/8+h/128, w/20, h/9);
     craftingPane.drawRect(11*w/16+w/8+w/128, 7*h/8+h/128, w/20, h/9);
     app.stage.addChild(craftingPane);
 
