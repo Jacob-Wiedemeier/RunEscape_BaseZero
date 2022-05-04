@@ -93,6 +93,7 @@ async function loadScreen(){
     clearScreen();
 
     const player = await db_fetch('getPlayer')
+    console.log(player)
 
     const db_enemies = await db_fetch('getEnemies')
     const node_enemies = db_enemies.filter((enemy) => enemy.fk_WorldNode === player.fk_WorldNodeID)

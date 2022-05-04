@@ -83,7 +83,8 @@ let getEnemies = async function() {
                 experienceReward: enemy.ExperienceReward,
                 fk_WorldNode: enemy.FK_WorldNode,
                 fk_Username: enemy.FK_Username,
-                fk_ItemID: enemy.FK_ItemID
+                fk_ItemID: enemy.FK_ItemID,
+                filename: enemy.Filename
             };
             enemies.push(thisEnemy);
         });
@@ -118,7 +119,8 @@ let getEnemyById = async function(id) {
             experienceReward: results[0].ExperienceReward,
             fk_WorldNode: results[0].FK_WorldNode,
             fk_Username: results[0].FK_Username,
-            fk_ItemID: results[0].FK_ItemID
+            fk_ItemID: results[0].FK_ItemID,
+            filename: results[0].Filename
         };
     }).catch((err) => {
         console.log(err);
@@ -295,7 +297,8 @@ let getItems = async function() {
             let thisItem = {
                 itemID: item.ItemID,
                 name: item.Name,
-                fk_Username: item.FK_Username
+                fk_Username: item.FK_Username,
+                filename: item.Filename
             };
             items.push(thisItem);
         });
@@ -321,7 +324,8 @@ let getItemById = async function(id) {
         obj = {
             itemID: results[0].ItemID,
             name: results[0].Name,
-            fk_Username: results[0].FK_Username
+            fk_Username: results[0].FK_Username,
+            filename: results[0].Filename
         };
     }).catch((err) => {
         console.log(err);
@@ -345,7 +349,7 @@ let getPlayer = async function() {
         player = {
             username: results.Username,
             craftingExperience: results.CraftingExperience,
-            combatExperience: results.CombatExperience,
+            combatExperience: results.CombatExperiennce, // typo is intentional
             harvestExperience: results.HarvestingExperience,
             maxHealth: results.MaxHealth,
             currentHealth: results.CurrentHealth,
@@ -429,6 +433,8 @@ let getRecipeByIngredients = async function(id1, id2) {
             recipeID: results[0].RecipeID,
             craftingRequirement: results[0].CraftingRequirement,
             experienceReward: results[0].ExperienceReward,
+            fk_IngredientID_1: results[0].FK_IngredientID_1,
+            fk_IngredientID_2: results[0].FK_IngredientID_2,
             fk_ItemID: results[0].FK_ItemID,
             fk_Username: results[0].FK_Username
         };
@@ -462,7 +468,8 @@ let getResources = async function() {
                 experienceReward: resource.ExperienceReward,
                 fk_WorldNode: resource.FK_WorldNode,
                 fk_ItemID: resource.FK_ItemID,
-                fk_Username: resource.FK_Username
+                fk_Username: resource.FK_Username,
+                filename: resource.Filename
             };
             resources.push(thisResource);
         });
@@ -494,7 +501,8 @@ let getResourceById = async function(id) {
             experienceReward: results[0].ExperienceReward,
             fk_WorldNode: results[0].FK_WorldNode,
             fk_ItemID: results[0].FK_ItemID,
-            fk_Username: results[0].FK_Username
+            fk_Username: results[0].FK_Username,
+            filename: results[0].Filename
         };
     }).catch((err) => {
         console.log(err);
