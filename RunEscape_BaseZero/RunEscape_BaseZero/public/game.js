@@ -1,4 +1,4 @@
-let DEBUG_ON = true;
+let DEBUG_ON = false;
 
 let w = 1600, h = 900;
 let app = new PIXI.Application({width:w, height:h, antialias:true});

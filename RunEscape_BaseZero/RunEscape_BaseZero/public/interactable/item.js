@@ -5,7 +5,7 @@ class Item extends Sprite{
         this.item = db_fetch('getItemById', this.id);
         let pos = lookupItemPosition();
 
-        super.init(this.filename, pos[0], pos[1]);
+        super.init("/static/images/"+this.filename, pos[0], pos[1]);
 
         let spriteRef = super.get();
         spriteRef.on('click', itemClicked(e));
