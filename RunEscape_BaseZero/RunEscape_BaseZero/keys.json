@@ -1,0 +1,8 @@
+{
+    "mariadb": {
+        "host": "d805d2.stackhero-network.com",
+        "user": "root",
+        "password": "OkhxZ62FIP4f5YRJdjC4tjP9E0lvLO2w",
+        "database": "basezero"
+    }
+}

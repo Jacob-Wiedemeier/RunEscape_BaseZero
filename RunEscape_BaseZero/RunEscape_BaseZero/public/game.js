@@ -16,6 +16,8 @@ drawUIConstant();
 let statsDisplay = new Stats();
 statsDisplay.init();
 
+loadScreen();
+
 
 function gameLoop(){
 
@@ -85,7 +87,37 @@ function clearScreen(){
 }
 
 async function loadScreen(){
-    clearScreen();
+    
     // QUERY-HEAVY FUNCTION
     // Populate Enemies, Resources, and worldEdges with whatever can be found in the node associated with Player.FK_WorldNodeID
+    clearScreen();
+
+    const player = await db_fetch('getPlayer')
+
+    const db_enemies = await db_fetch('getEnemies')
+    const node_enemies = db_enemies.filter((enemy) => enemy.fk_WorldNode === player.fk_WorldNodeID)
+    
+    enemies = await node_enemies.map(async (enemy) => {
+        const enemy_obj = new Enemy()
+        await enemy_obj.init(enemy.EnemyID, enemy.Filename)
+        return enemy_obj
+    })
+
+    const db_resources = await db_fetch('getResources')
+    const node_resources = db_resources.filter((resource) => resource.fk_WorldNode === player.fk_WorldNodeID)
+
+    resources = await node_resources.map(async (resource) => {
+        const resource_obj = new Resource()
+        await resource_obj.init(resource.ResourceID, resource.Filename)
+        return resource_obj
+    })
+
+    const db_world_edges = await db_fetch('getWorldEdges')
+    const node_world_edges = db_world_edges.filter((edge) => edge.fk_WorldNodeID === player.fk_WorldNodeID)
+
+    worldEdges = await node_enemies.map(async (edge) => {
+        const edge_obj = new WorldEdge()
+        await edge_obj.init(edge.WorldEdgeID)
+        return edge_obj
+    })
 }

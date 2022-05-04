@@ -414,6 +414,31 @@ let getRecipeById = async function(id) {
     return obj;
 }
 
+let getRecipeByIngredients = async function(id1, id2) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`SELECT * FROM Recipe WHERE Ingredient1=${id1} AND Ingredient2=${id2}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).then((results) => {
+        obj = {
+            recipeID: results[0].RecipeID,
+            craftingRequirement: results[0].CraftingRequirement,
+            experienceReward: results[0].ExperienceReward,
+            fk_ItemID: results[0].FK_ItemID,
+            fk_Username: results[0].FK_Username
+        };
+    }).catch((err) => {
+        console.log(err);
+    });
+    return obj;
+}
+
+
 // Function for getting all Resources
 // Returns an array of Objects
 let getResources = async function() {
@@ -530,6 +555,52 @@ let getWorldEdgeById = async function(id) {
     return obj;
 }
 
+let updatePlayer = async function(player) {
+    let connection = createMySQLConnection();
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`UPDATE Player SET CraftingExperience=${player.craftingExperience} CombatExperience=${player.combatExperience} HarvestingExperience=${player.harvestExperience},
+            MaxHealth=${player.maxHealth} CurrentHealth=${player.currentHealth} FK_WorldNodeID=${player.fk_WorldNodeID}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+let updateResourceById = async function(resource, id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`UPDATE Resource SET NextHarvestTime=${resource.nextHarvestTime} WHERE ResourceID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+let updateEnemyById = async function(enemy, id) {
+    let connection = createMySQLConnection();
+    let obj = {};
+    await new Promise((resolve, reject) => {
+        connection.connect();
+        connection.query(`UPDATE Enemy SET NextRespawnTime=${enemy.nextRespawnTime} WHERE EnemyID=${id}`, (err, results) => {
+            connection.end();
+            if (err) reject (err);
+            else resolve(results);
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+
 // Function for running a SQL statement
 // Returns an array of Objects
 let getSQLQuery = async function(statement) {
@@ -550,6 +621,7 @@ let getSQLQuery = async function(statement) {
     return res;
 }
 
+
 module.exports = {
     getWorldNodes: getWorldNodes,
     getEnemies: getEnemies,
@@ -569,5 +641,9 @@ module.exports = {
     getRecipeById: getRecipeById,
     getResourceById: getResourceById,
     getWorldEdgeById: getWorldEdgeById,
-    getSQLQuery: getSQLQuery
+    getSQLQuery: getSQLQuery,
+    updatePlayer: updatePlayer,
+    updateResourceById: updateResourceById,
+    updateEnemyById: updateEnemyById,
+    getRecipeByIngredients: getRecipeByIngredients,
 }

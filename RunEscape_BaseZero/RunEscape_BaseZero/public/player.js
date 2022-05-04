@@ -1,30 +1,33 @@
-function playerHealthCheck(){
-    var currentHealth = 0;
-    // QUERY Player.CurrentHealth
+async function playerHealthCheck(){
+    const player = await getPlayer()
 
-    if(currentHealth <= 0){
+    if(player.currentHealth <= 0){
         // Player is dead
         // EMPTY Player's Inventory
+        inventory = []
         // SET Player.CurrentHealth = Player.MaxHealth
+        player.currentHealth = player.maxHealth
         // SET Player.FK_WorldNodeID = 1000; 
+        player.fk_WorldNodeId = 1000
+        await updatePlayer()
     }
     statsDisplay.updateStats();
 }
 
-function playerCalcDamage(){
-    var combatExp = 0;
+async function playerCalcDamage(){
+    const player = await getPlayer()
     // QUERY Player.CombatExperience
-    var combatLevel = ExpToLevel(combatExp);
+    var combatLevel = ExpToLevel(player.combatExperience);
 
     var attackBase = playerEquipmentAttack();
 
     return math.floor(combatLevel * attackBase);
 }
 
-function playerCalcDefense(){
-    var combatExp = 0;
+async function playerCalcDefense(){
+    const player = await getPlayer()
     // QUERY Player.CombatExperience
-    var combatLevel = ExpToLevel(combatExp);
+    var combatLevel = ExpToLevel(player.combatExperience);
 
     var defenseBase = playerEquipmentDefense();
 
@@ -63,4 +66,12 @@ function playerEquipmentSpace(){
     //  Count all items in equipment
 
     return 3 - totalItems;
+}
+
+async function updatePlayer(player){ 
+    await db_post('updatePlayer', player)
+}
+
+async function getPlayer(){
+    return await db_fetch('getPlayer')
 }
