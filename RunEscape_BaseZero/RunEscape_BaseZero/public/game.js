@@ -1,3 +1,6 @@
+
+
+
 let DEBUG_ON = false;
 
 let w = 1600, h = 900;
@@ -17,7 +20,6 @@ let statsDisplay = new Stats();
 statsDisplay.init();
 
 loadScreen();
-
 
 function gameLoop(){
 
@@ -100,7 +102,8 @@ async function loadScreen(){
     
     enemies = await node_enemies.map(async (enemy) => {
         const enemy_obj = new Enemy()
-        await enemy_obj.init(enemy.EnemyID, enemy.Filename)
+        console.log(enemy)
+        await enemy_obj.init(enemy.EnemyID, enemy.filename)
         return enemy_obj
     })
 
@@ -109,15 +112,17 @@ async function loadScreen(){
 
     resources = await node_resources.map(async (resource) => {
         const resource_obj = new Resource()
-        await resource_obj.init(resource.ResourceID, resource.Filename)
+        console.log(resource)
+        await resource_obj.init(resource.ResourceID, resource.filename)
         return resource_obj
     })
 
     const db_world_edges = await db_fetch('getWorldEdges')
     const node_world_edges = db_world_edges.filter((edge) => edge.fk_WorldNodeID === player.fk_WorldNodeID)
 
-    worldEdges = await node_enemies.map(async (edge) => {
+    worldEdges = await node_world_edges.map(async (edge) => {
         const edge_obj = new WorldEdge()
+        console.log(edge)
         await edge_obj.init(edge.WorldEdgeID)
         return edge_obj
     })

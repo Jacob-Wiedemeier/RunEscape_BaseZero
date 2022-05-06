@@ -1,4 +1,15 @@
 class WorldEdge extends Sprite{
+
+    async traverse(){
+        // SET Player.FK_WorldNodeID = WorldEdge.FK_WorldNodeID
+
+        const player = await getPlayer()
+        console.log(player)
+        player.fk_WorldNodeID = this.destination
+        await updatePlayer(player)
+
+        loadScreen();
+    }
     // initialization requires async functions, so handle construction in init function.
     async init(id, destination){
         this.id = id;
@@ -23,18 +34,12 @@ class WorldEdge extends Sprite{
         }
         this.destination = destination;
 
-        super.init("/static/images/portal.png", x, y);
+        await super.init("/static/images/portal.png", x, y);
+        console.log(this.sprite)
+        this.sprite.on('click', this.traverse)
         
         super.show();
     }
 
-    async traverse(){
-        // SET Player.FK_WorldNodeID = WorldEdge.FK_WorldNodeID
 
-        const player = await getPlayer()
-        player.fk_WorldNodeID = this.destination
-        await updatePlayer(player)
-
-        loadScreen();
-    }
 }
